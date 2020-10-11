@@ -1,0 +1,20 @@
+version: "2.4"
+
+services:
+  asset-host:
+    build:
+      context: ./asset-host
+    image: asset-host
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - asset-storage:/assets
+      - asset-config:/etc/lighttpd
+    tmpfs:
+      - /var/www/localhost
+    ports:
+      - 8080:80/tcp
+
+volumes:
+  asset-storage:
+  asset-config:
