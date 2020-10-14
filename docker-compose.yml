@@ -5,7 +5,7 @@ services:
     build:
       context: ./asset-host
     image: asset-host
-    restart: unless-stopped
+    restart: always
     tty: true
     volumes:
       - asset-storage:/assets
@@ -14,7 +14,15 @@ services:
       - /var/www/localhost
     ports:
       - 8080:80/tcp
+  pxe-server:
+    image: taskinen/tftp
+    restart: always
+    volumes:
+      - tftp:/var/tftpboot:ro
+    ports:
+      - 69:69/udp
 
 volumes:
   asset-storage:
   asset-config:
+  tftp:
