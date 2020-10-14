@@ -8,21 +8,26 @@ services:
     restart: always
     tty: true
     volumes:
-      - asset-storage:/assets
-      - asset-config:/etc/lighttpd
+      - netboot-asset:/assets
+      - lighttpd-config:/etc/lighttpd
     tmpfs:
       - /var/www/localhost
     ports:
       - 8080:80/tcp
-  pxe-server:
-    image: taskinen/tftp
-    restart: always
+  netbootxyz:
+    image: linuxserver/netbootxyz
+    environment:
+      - PUID=1000
+      - PGID=1000
     volumes:
-      - tftp:/var/tftpboot:ro
+      - netboot-config:/config
+      - netboot-asset:/assets #optional
     ports:
+      - 3000:3000
       - 69:69/udp
+    restart: unless-stopped
 
 volumes:
-  asset-storage:
-  asset-config:
-  tftp:
+  lighttpd-config:
+  netboot-asset:
+  netboot-config:
