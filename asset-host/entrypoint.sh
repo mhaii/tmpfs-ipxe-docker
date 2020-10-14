@@ -5,6 +5,8 @@ if [ -n "$(ls -A /assets 2>/dev/null)" ]
 then
   echo "COPY!"
   cp -rf /assets /var/www/localhost/htdocs
+else
+  mkdir -p /var/www/localhost/htdocs
 fi
 
 chmod 755 /var/www/localhost/htdocs
