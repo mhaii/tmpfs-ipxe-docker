@@ -1,7 +1,11 @@
 version: "2.4"
 
+## USG DHCP: [ip],pxelinux.0
+
 ## Porteus kiosk: add http ip to `[...]/assets/boot/pxelinux.cfg/default`
 ## edit lighttp config to allow directory listing
+
+## check for missing `initrdpxe.xz`; downloadable from `https://porteus-kiosk.org/public/`
 
 services:
   asset-host:
