@@ -1,5 +1,8 @@
 version: "2.4"
 
+## Porteus kiosk: add http ip to `[...]/assets/boot/pxelinux.cfg/default`
+## edit lighttp config to allow directory listing
+
 services:
   asset-host:
     build:

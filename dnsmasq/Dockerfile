@@ -7,5 +7,5 @@ EXPOSE 69/udp
 # Configure DNSMASQ
 COPY etc/ /etc
 
-ENTRYPOINT ["dnsmasq", "-keep-in-foreground", "--log-facility=-"]
+ENTRYPOINT ["dnsmasq", "--keep-in-foreground", "--log-facility=-"]
 CMD [""]
