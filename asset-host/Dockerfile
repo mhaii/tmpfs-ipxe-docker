@@ -1,6 +1,6 @@
 FROM sebp/lighttpd
 
-VOLUME ["/assets"]
+VOLUME /assets
 
 COPY entrypoint.sh /
 RUN chmod a+x entrypoint.sh

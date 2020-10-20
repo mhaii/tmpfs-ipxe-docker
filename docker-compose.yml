@@ -8,26 +8,25 @@ services:
     restart: always
     tty: true
     volumes:
-      - netboot-asset:/assets
+      - assets:/assets
       - lighttpd-config:/etc/lighttpd
     tmpfs:
       - /var/www/localhost
     ports:
       - 8080:80/tcp
-  netbootxyz:
-    image: linuxserver/netbootxyz
-    environment:
-      - PUID=1000
-      - PGID=1000
+  dnsmasq:
+    build:
+      context: ./dnsmasq
+    image: dnsmasq
+    restart: always
+    command: --dhcp-boot=pxelinux.0,"172.16.0.66",172.16.0.66 --dhcp-range=172.160.0.66,proxy
     volumes:
-      - netboot-config:/config
-      - netboot-asset:/assets #optional
+      - assets:/var/lib/tftpboot
+    cap_add:
+      - NET_ADMIN
     ports:
-      - 3000:3000
       - 69:69/udp
-    restart: unless-stopped
 
 volumes:
+  assets:
   lighttpd-config:
-  netboot-asset:
-  netboot-config:
